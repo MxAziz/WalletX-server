@@ -1,15 +1,18 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app: Application = express();
 
-// Middlewares
+// middlewares
 app.use(cors());
 app.use(express.json());
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("✅ API is working!");
+// routes
+app.get("/", (req: Request, res: Response) => {
+  res.send("Hello, TypeScript + Express + MongoDB 🚀");
 });
 
 export default app;
