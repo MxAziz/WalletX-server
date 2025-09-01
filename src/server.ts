@@ -17,6 +17,7 @@ const startServer = async () => {
     });
   } catch (err) {
     console.error("❌ Server failed to start:", err);
+    process.exit(1);
   }
 };
 
@@ -63,8 +64,7 @@ process.on("unhandledRejection", (err) => {
 // promise.reject(new Error("forgot to catch this promise"))
 
 
-// ===================== uncaught rejection error =====================
-// local kono problem-- jeta try-catch diye handle kora hoi ni (development code)
+// uncaught rejection error
 process.on("uncaughtException", (err) => {
     console.log("uncaught exception detected-- server shutting down...", err);
 
