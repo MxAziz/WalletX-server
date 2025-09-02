@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import notFound from "./app/middlewares/notFound";
 
 dotenv.config();
 
@@ -12,7 +13,9 @@ app.use(express.json());
 
 // routes
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, TypeScript + Express + MongoDB 🚀");
+  res.send("Api is Running");
 });
+
+app.use(notFound);
 
 export default app;
