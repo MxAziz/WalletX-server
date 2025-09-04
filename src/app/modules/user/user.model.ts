@@ -1,28 +1,16 @@
 import { model, Schema } from "mongoose";
-import { ApprovalStatus, IUser, Role } from "./user.interface";
+import { IUser, Role } from "./user.interface";
 
-// add model : name, email, phone ,password , role , picture, approvalStatus, isBlocked
 const userSchema = new Schema<IUser>(
   {
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    fullname: { type: String, required: true },
     phone: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    role: { type: String, enum: Object.values(Role), required: true },
-    picture: { type: String },
-    approvalStatus: {
-      type: String,
-      enum: Object.values(ApprovalStatus),
-      default: ApprovalStatus.PENDING,
-    },
-    isBlocked: { type: Boolean, default: false },
+    password: { type: String, required: true, select: false },
+    role: { type: String, enum: Object.values(Role), default: Role.USER },
+    agentApproval: { type: Boolean, default: undefined },
   },
-  {
-    timestamps: true,
-    versionKey: false,
-  }
+  { timestamps: true }
 );
 
-const User = model<IUser>("User", userSchema);
 
-export default User;
+export const User = model<IUser>("User", userSchema);

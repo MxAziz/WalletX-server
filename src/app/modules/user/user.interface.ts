@@ -1,4 +1,7 @@
+import { Types } from "mongoose";
+
 export enum Role {
+    SUPERADMIN = "SUPERADMIN",
     ADMIN = "ADMIN",
     USER = "USER",
     AGENT = "AGENT"
@@ -11,12 +14,10 @@ export enum ApprovalStatus {
 }
 
 export interface IUser {
-    name: string;
-    email: string;
-    phone: string;
-    password: string;
-    role: Role;
-    picture?: string;
-    approvalStatus?: ApprovalStatus;
-    isBlocked: boolean;
+  _id?: Types.ObjectId;
+  fullname: string;
+  phone: string;
+  password: string;
+  role?: Role;
+  agentApproval?: boolean;
 }
