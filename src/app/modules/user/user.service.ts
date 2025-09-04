@@ -1,7 +1,7 @@
 import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
 import { IUser } from "./user.interface";
-import User from "./user.model";
+import { User } from "./user.model";
 import httpStatus from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 
