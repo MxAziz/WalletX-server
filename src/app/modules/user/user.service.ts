@@ -17,7 +17,7 @@ const register = async (payload: IUser) => {
     );
 
   const hashedPassword = await bcrypt.hash(
-    password,
+    password as string,
     Number(envVars.BCRYPT_SALT_ROUND)
   );
 
