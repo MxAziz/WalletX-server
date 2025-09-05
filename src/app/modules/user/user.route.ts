@@ -5,6 +5,8 @@ import { createUserZodSchema } from "./user.validation";
 
 const router = Router();
 
+// api/v1/user/...
+
 router.post(
   "/register",
   validateRequest(createUserZodSchema),
