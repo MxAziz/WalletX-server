@@ -4,6 +4,7 @@ import { sendResponse } from "../../utils/sendResponse";
 import { StatusCodes } from "http-status-codes";
 import { authServices } from "./auth.service";
 import { setAuthCookie } from "../../utils/setCookie";
+import AppError from "../../errorHelpers/AppError";
 
 
 
@@ -22,7 +23,31 @@ const credentialLogin = catchAsync(
   }
 );
 
+const getNewAccessToken = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      throw new AppError(
+        StatusCodes.BAD_REQUEST,
+        "No refresh token received from cookies"
+      );
+    }
+
+    const accessToken = await authServices.getNewAccessToken(refreshToken);
+    console.log(accessToken);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "New Access Token Retrieved successfully",
+      data: accessToken,
+    });
+  }
+);
+
 
 export const authController = {
   credentialLogin,
+  getNewAccessToken,
 };
