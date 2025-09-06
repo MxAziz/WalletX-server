@@ -49,8 +49,44 @@ const updateUser = async (userId: string, payload: Record<string, string>) => {
   return user;
 };
 
+const changePassword = async (
+  userId: string,
+  payload: { currentPassword: string; newPassword: string }
+) => {
+  const { currentPassword, newPassword } = payload;
+
+  const user = await User.findById(userId).select("password");
+  if (!user) {
+    throw new AppError(StatusCodes.BAD_REQUEST, "User does not exist");
+  }
+
+  const isPasswordMatched = await bcrypt.compare(
+    currentPassword as string,
+    user.password
+  );
+
+  if (!isPasswordMatched) {
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      "Current Password is incorrect"
+    );
+  }
+
+  const hashedPassword = await bcrypt.hash(
+    newPassword as string,
+    Number(envVars.BCRYPT_SALT_ROUND)
+  );
+
+  user.password = hashedPassword;
+  await user.save();
+  const { password: pass, ...userInfo } = user.toObject();
+
+  return userInfo;
+};
+
 export const userServices = {
     register,
     getMe,
     updateUser,
+    changePassword,
 };
