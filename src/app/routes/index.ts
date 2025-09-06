@@ -4,7 +4,7 @@ import { AuthRoutes } from "../modules/auth/auth.route";
 
 export const router = Router();
 
-// api/v1/...
+// baseurl/api/v1/...
 const moduleRoutes = [
     {
         path: "/user",

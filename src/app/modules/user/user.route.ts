@@ -7,7 +7,7 @@ import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = Router();
 
-// api/v1/user/...
+// baseurl/api/v1/user/...
 
 router.post(
   "/register",
@@ -27,5 +27,7 @@ router.patch(
 
 // only admin access
 router.get("/all-users", checkAuth(Role.ADMIN), userControllers.getAllUsers);
+
+router.get("/:id", checkAuth(Role.ADMIN), userControllers.getSingleUser);
 
 export const UserRoutes = router;

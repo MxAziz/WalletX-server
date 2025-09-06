@@ -103,10 +103,20 @@ const getAllUsers = async (query: Record<string, string>) => {
   return { data: users, meta: { total, limit, page, totalPages } };
 };
 
+const getSingleUser = async (userId: string) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+  }
+
+  return user;
+};
+
 export const userServices = {
     register,
     getMe,
     updateUser,
     changePassword,
     getAllUsers,
+    getSingleUser,
 };

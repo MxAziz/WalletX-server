@@ -84,6 +84,20 @@ const getAllUsers = catchAsync(
   }
 );
 
+const getSingleUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    const user = await userServices.getSingleUser(userId);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "User retrieved successfully",
+      data: user,
+    });
+  }
+);
+
 
 export const userControllers = {
   register,
@@ -91,4 +105,5 @@ export const userControllers = {
   updateUser,
   changePassword,
   getAllUsers,
+  getSingleUser,
 };
