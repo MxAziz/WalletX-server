@@ -11,10 +11,7 @@ const register = async (payload: IUser) => {
 
   const isUserExist = await User.findOne({ phone });
   if (isUserExist)
-    throw new AppError(
-      httpStatus.BAD_REQUEST,
-      "User already exist with the Phone Number"
-    );
+    throw new AppError( httpStatus.BAD_REQUEST, "User already exist with the Phone Number");
 
   const hashedPassword = await bcrypt.hash(
     password as string,
@@ -42,17 +39,12 @@ const updateUser = async (userId: string, payload: Record<string, string>) => {
     }
   }
 
-  const user = await User.findOneAndUpdate({ _id: userId }, payload, {
-    new: true,
-    runValidators: true,
-  });
+  const user = await User.findOneAndUpdate({ _id: userId }, payload, { new: true, runValidators: true, });
+
   return user;
 };
 
-const changePassword = async (
-  userId: string,
-  payload: { currentPassword: string; newPassword: string }
-) => {
+const changePassword = async ( userId: string, payload: { currentPassword: string; newPassword: string }) => {
   const { currentPassword, newPassword } = payload;
 
   const user = await User.findById(userId).select("password");
@@ -66,10 +58,7 @@ const changePassword = async (
   );
 
   if (!isPasswordMatched) {
-    throw new AppError(
-      StatusCodes.BAD_REQUEST,
-      "Current Password is incorrect"
-    );
+    throw new AppError( StatusCodes.BAD_REQUEST, "Current Password is incorrect");
   }
 
   const hashedPassword = await bcrypt.hash(
@@ -117,10 +106,7 @@ const approveAgent = async (userId: string) => {
   if (!user) throw new AppError(StatusCodes.NOT_FOUND, "User not found");
 
   if (user.role !== Role.AGENT)
-    throw new AppError(
-      StatusCodes.BAD_REQUEST,
-      "User not registered as an Agent"
-    );
+    throw new AppError( StatusCodes.BAD_REQUEST, "User not registered as an Agent");
 
   if (user.agentApproval)
     throw new AppError(StatusCodes.BAD_REQUEST, "Agent is already Approved");

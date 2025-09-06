@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { userControllers } from "./user.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { createUserZodSchema, updateUserZodSchema } from "./user.validation";
+import { changePasswordZodSchema, createUserZodSchema, updateUserZodSchema } from "./user.validation";
 import { Role } from "./user.interface";
 import { checkAuth } from "../../middlewares/checkAuth";
 
@@ -24,6 +24,12 @@ router.patch(
   userControllers.updateUser
 );
 
+router.patch(
+  "/change-password",
+  checkAuth(...Object.values(Role)),
+  validateRequest(changePasswordZodSchema),
+  userControllers.changePassword
+);
 
 // possible to approved users as agent
 router.patch(
