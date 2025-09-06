@@ -2,6 +2,7 @@ import { Server } from "http";
 import app from "./app";
 import { connectDB } from "./app/config/database";
 import dotenv from "dotenv";
+import { seedSuperAdmin } from "./app/utils/seedSuperAdmin";
 
 dotenv.config();
 
@@ -21,8 +22,10 @@ const startServer = async () => {
   }
 };
 
-startServer();
-
+(async () => {
+  await startServer();
+  await seedSuperAdmin();
+})();
 
 // ===================== signal termination / sigterm =====================
 process.on("SIGTERM", () => {
