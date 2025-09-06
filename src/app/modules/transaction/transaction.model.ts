@@ -27,7 +27,4 @@ export const transactionSchema = new Schema<ITransaction>(
   { timestamps: true }
 );
 
-export const Transaction = model<ITransaction>(
-  "Transaction",
-  transactionSchema
-);
+export const Transaction = model<ITransaction>( "Transaction", transactionSchema);
