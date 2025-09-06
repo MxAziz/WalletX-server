@@ -13,6 +13,7 @@ router.post(
   authController.credentialLogin
 );
 
+router.post("/logout", authController.logout);
 
 router.post("/refresh-token", authController.getNewAccessToken);
 
