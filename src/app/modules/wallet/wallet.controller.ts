@@ -20,3 +20,8 @@ const myWallet = catchAsync(
     });
   }
 );
+
+
+export const walletControllers = {
+  myWallet,
+};
