@@ -112,6 +112,20 @@ const approveAgent = catchAsync(
   }
 );
 
+const suspendAgent = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    const result = await userServices.suspendAgent(userId);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Suspended as an agent successfully",
+      data: result,
+    });
+  }
+);
+
 
 export const userControllers = {
   register,
@@ -121,4 +135,5 @@ export const userControllers = {
   getAllUsers,
   getSingleUser,
   approveAgent,
+  suspendAgent,
 };

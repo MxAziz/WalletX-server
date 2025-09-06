@@ -32,6 +32,11 @@ router.patch(
   userControllers.approveAgent
 );
 
+router.patch(
+  "/suspend-agent/:id",
+  checkAuth(Role.ADMIN),
+  userControllers.suspendAgent
+);
 
 // only admin access
 router.get("/all-users", checkAuth(Role.ADMIN), userControllers.getAllUsers);

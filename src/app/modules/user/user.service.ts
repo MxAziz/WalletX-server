@@ -132,6 +132,27 @@ const approveAgent = async (userId: string) => {
   return user;
 };
 
+const suspendAgent = async (userId: string) => {
+  const user = await User.findById(userId);
+
+  if (!user) throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+
+  if (user.role !== Role.AGENT)
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      "User not registered as an Agent"
+    );
+
+  if (!user.agentApproval)
+    throw new AppError(StatusCodes.BAD_REQUEST, "Agent is already suspended");
+
+  user.agentApproval = false;
+
+  await user.save();
+
+  return user;
+};
+
 export const userServices = {
   register,
   getMe,
@@ -140,4 +161,5 @@ export const userServices = {
   getAllUsers,
   getSingleUser,
   approveAgent,
+  suspendAgent,
 };
