@@ -25,4 +25,7 @@ router.patch(
 );
 
 
+// only admin access
+router.get("/all-users", checkAuth(Role.ADMIN), userControllers.getAllUsers);
+
 export const UserRoutes = router;

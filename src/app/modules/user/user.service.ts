@@ -84,9 +84,29 @@ const changePassword = async (
   return userInfo;
 };
 
+const getAllUsers = async (query: Record<string, string>) => {
+  const filter: any = {};
+  const sort = query.sort || "-createdAt";
+  const page = Number(query.page) || 1;
+  const limit = Number(query.limit) || 10;
+  const skip = (page - 1) * Number(limit);
+
+  if (query.role) filter.role = query.role;
+  if (query.phone) filter.phone = query.phone;
+
+  if (query.agentApproval) filter.agentApproval = query.agentApproval;
+
+  const users = await User.find(filter).sort(sort).skip(skip).limit(limit);
+
+  const total = await User.countDocuments(filter);
+  const totalPages = Math.ceil(total / limit);
+  return { data: users, meta: { total, limit, page, totalPages } };
+};
+
 export const userServices = {
     register,
     getMe,
     updateUser,
     changePassword,
+    getAllUsers,
 };

@@ -68,6 +68,21 @@ const changePassword = catchAsync(
   }
 );
 
+const getAllUsers = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const query = req.query;
+
+    const result = await userServices.getAllUsers( query as Record<string, string>);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Users retrieved successfully",
+      data: result.data,
+      meta: result.meta,
+    });
+  }
+);
 
 
 export const userControllers = {
@@ -75,4 +90,5 @@ export const userControllers = {
   getMe,
   updateUser,
   changePassword,
+  getAllUsers,
 };
