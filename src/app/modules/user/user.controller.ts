@@ -35,9 +35,25 @@ const getMe = catchAsync(
   }
 );
 
+const updateUser = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const payload = req.body;
+    const decodedToken = req.user;
+    const user = await userServices.updateUser(decodedToken.userId, payload);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Updated successfully",
+      data: user,
+    });
+  }
+);
+
 
 
 export const userControllers = {
   register,
   getMe,
+  updateUser,
 };

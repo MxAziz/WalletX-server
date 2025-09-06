@@ -2,7 +2,7 @@ import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
-import httpStatus from 'http-status-codes';
+import httpStatus, { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 
 
@@ -33,7 +33,24 @@ const getMe = async (userId: string) => {
   return user;
 };
 
+const updateUser = async (userId: string, payload: Record<string, string>) => {
+  if (payload.phone) {
+    const phoneExists = await User.findOne({ phone: payload.phone });
+
+    if (phoneExists) {
+      throw new AppError(StatusCodes.BAD_REQUEST, "Phone number already exist.");
+    }
+  }
+
+  const user = await User.findOneAndUpdate({ _id: userId }, payload, {
+    new: true,
+    runValidators: true,
+  });
+  return user;
+};
+
 export const userServices = {
     register,
     getMe,
-}
+    updateUser,
+};
