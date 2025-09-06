@@ -27,6 +27,13 @@ const register = async (payload: IUser) => {
   return userInfo;
 };
 
+const getMe = async (userId: string) => {
+  const user = await User.findById(userId);
+
+  return user;
+};
+
 export const userServices = {
     register,
+    getMe,
 }
