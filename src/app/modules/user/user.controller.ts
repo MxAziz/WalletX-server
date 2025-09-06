@@ -98,6 +98,20 @@ const getSingleUser = catchAsync(
   }
 );
 
+const approveAgent = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.params.id;
+    const result = await userServices.approveAgent(userId);
+
+    sendResponse(res, {
+      statusCode: StatusCodes.OK,
+      success: true,
+      message: "Agent approved successfully",
+      data: result,
+    });
+  }
+);
+
 
 export const userControllers = {
   register,
@@ -106,4 +120,5 @@ export const userControllers = {
   changePassword,
   getAllUsers,
   getSingleUser,
+  approveAgent,
 };

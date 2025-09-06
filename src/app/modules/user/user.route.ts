@@ -25,6 +25,14 @@ router.patch(
 );
 
 
+// possible to approved users as agent
+router.patch(
+  "/approve-agent/:id",
+  checkAuth(Role.ADMIN),
+  userControllers.approveAgent
+);
+
+
 // only admin access
 router.get("/all-users", checkAuth(Role.ADMIN), userControllers.getAllUsers);
 

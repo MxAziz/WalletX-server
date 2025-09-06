@@ -1,6 +1,6 @@
 import { envVars } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
-import { IUser } from "./user.interface";
+import { IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus, { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
@@ -112,11 +112,32 @@ const getSingleUser = async (userId: string) => {
   return user;
 };
 
+const approveAgent = async (userId: string) => {
+  const user = await User.findById(userId);
+  if (!user) throw new AppError(StatusCodes.NOT_FOUND, "User not found");
+
+  if (user.role !== Role.AGENT)
+    throw new AppError(
+      StatusCodes.BAD_REQUEST,
+      "User not registered as an Agent"
+    );
+
+  if (user.agentApproval)
+    throw new AppError(StatusCodes.BAD_REQUEST, "Agent is already Approved");
+
+  user.agentApproval = true;
+
+  await user.save();
+
+  return user;
+};
+
 export const userServices = {
-    register,
-    getMe,
-    updateUser,
-    changePassword,
-    getAllUsers,
-    getSingleUser,
+  register,
+  getMe,
+  updateUser,
+  changePassword,
+  getAllUsers,
+  getSingleUser,
+  approveAgent,
 };
