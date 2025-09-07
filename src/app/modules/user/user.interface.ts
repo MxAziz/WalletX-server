@@ -7,11 +7,6 @@ export enum Role {
     AGENT = "AGENT"
 }
 
-export enum ApprovalStatus {
-    PENDING = "PENDING",
-    APPROVED = "APPROVED",
-    REJECTED = "REJECTED"
-}
 
 export interface IUser {
   _id?: Types.ObjectId;

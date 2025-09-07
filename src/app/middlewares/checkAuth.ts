@@ -16,10 +16,7 @@ export const checkAuth =
         if (!accessToken)
             throw new AppError(StatusCodes.FORBIDDEN, "No token received");
 
-        const verifiedToken = verifyToken(
-            accessToken,
-            envVars.JWT_ACCESS_TOKEN_SECRET
-        ) as JwtPayload;
+        const verifiedToken = verifyToken( accessToken, envVars.JWT_ACCESS_TOKEN_SECRET) as JwtPayload;
 
         if (!authRoles.includes(verifiedToken.role)) {
             throw new AppError(403, "You are not authorize to access this route");
@@ -41,13 +38,7 @@ export const checkAuth =
             }
         }
 
-            // req.user = verifiedToken;  -> ata chilo agee  me :)
-        req.user = {
-            ...verifiedToken,
-            fullname: verifiedToken.fullname || "",
-            phone: verifiedToken.phone || "",
-            password: verifiedToken.password || ""
-        };
+        req.user = verifiedToken;
         next();
     } catch (error) {
       next(error);

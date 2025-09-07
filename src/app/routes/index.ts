@@ -9,7 +9,7 @@ export const router = Router();
 // baseurl/api/v1/...
 const moduleRoutes = [
     {
-        path: "/user",
+        path: "/users",
         route: UserRoutes
     },
     {

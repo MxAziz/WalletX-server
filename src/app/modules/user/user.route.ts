@@ -7,7 +7,7 @@ import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = Router();
 
-// baseurl/api/v1/user/...
+// baseurl/api/v1/users/...
 
 router.post(
   "/register",
