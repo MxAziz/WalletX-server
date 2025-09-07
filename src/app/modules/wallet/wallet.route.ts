@@ -56,4 +56,7 @@ router.post(
 //only Admin Access
 router.get("/all", checkAuth(Role.ADMIN), walletControllers.getAllWallets);
 
+
+router.get("/:id", checkAuth(Role.ADMIN), walletControllers.getSingleWallet);
+
 export const WalletRoutes = router;

@@ -192,6 +192,15 @@ const getAllWallets = async (query: Record<string, string>) => {
   };
 };
 
+const getSingleWallet = async (walletId: string) => {
+  const wallet = await Wallet.findById(walletId);
+  if (!wallet) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Wallet not found");
+  }
+
+  return wallet.populate("owner", "fullname phone role");
+};
+
 
 
 
@@ -203,4 +212,5 @@ export const walletServices = {
   cashIn,
   cashOut,
   getAllWallets,
+  getSingleWallet,
 }

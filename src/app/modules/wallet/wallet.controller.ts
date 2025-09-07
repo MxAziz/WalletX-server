@@ -147,6 +147,21 @@ const getAllWallets = catchAsync(
   }
 );
 
+const getSingleWallet = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const walletId = req.params.id;
+
+    const wallet = await walletServices.getSingleWallet(walletId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Wallet retrieved successfully",
+      data: wallet,
+    });
+  }
+);
+
 export const walletControllers = {
   myWallet,
   addMoney,
@@ -155,4 +170,5 @@ export const walletControllers = {
   cashOut,
   sendMoney,
   getAllWallets,
+  getSingleWallet,
 };
