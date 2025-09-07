@@ -3,6 +3,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { walletServices } from "./wallet.service";
 import { sendResponse } from "../../utils/sendResponse";
 import { StatusCodes } from "http-status-codes";
+import AppError from "../../errorHelpers/AppError";
 
 
 
@@ -61,9 +62,36 @@ const withdrawMoney = catchAsync(
   }
 );
 
+const sendMoney = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user;
+
+    const payload = {
+      sender: decodedToken.phone,
+      receiver: req.body.receiver,
+      amount: req.body.amount,
+    };
+
+    if (payload.sender === payload.receiver) {
+      throw new AppError(
+        StatusCodes.FORBIDDEN,
+        "Sender and Receiver can be same. Choose a valid receiver."
+      );
+    }
+    const wallet = await walletServices.sendMoney(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Send money successfully",
+      data: wallet,
+    });
+  }
+);
 
 export const walletControllers = {
   myWallet,
   addMoney,
   withdrawMoney,
+  sendMoney,
 };

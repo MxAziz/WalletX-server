@@ -29,5 +29,12 @@ router.post(
   walletControllers.withdrawMoney
 );
 
+router.post(
+  "/send-money",
+  checkAuth(Role.USER),
+  validateRequest(sendWithdrawAndCashInZodSchema),
+  walletControllers.sendMoney
+);
+
 
 export const WalletRoutes = router;

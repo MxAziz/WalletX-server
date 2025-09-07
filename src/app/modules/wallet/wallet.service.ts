@@ -70,6 +70,28 @@ const withdrawMoney = async (payload: Partial<ITransaction>) => {
   return transactionInfo;
 };
 
+const sendMoney = async (payload: Partial<ITransaction>) => {
+  const sender = await User.findOne({ phone: payload.sender });
+  const receiver = await User.findOne({ phone: payload.receiver });
+
+  if (!sender)
+    throw new AppError(StatusCodes.NOT_FOUND, "Sender does not exist");
+
+  if (!receiver)
+    throw new AppError(StatusCodes.NOT_FOUND, "Receiver does not exist");
+
+  if (receiver.role !== Role.USER) {
+    throw new AppError(StatusCodes.BAD_REQUEST, `Receiver must be a User.`);
+  }
+
+  const updatedWallet = await Wallet.sendMoney(
+    sender._id,
+    receiver._id,
+    payload.amount as number
+  );
+  return updatedWallet;
+};
+
 
 
 
@@ -77,4 +99,5 @@ export const walletServices = {
   myWallet,
   addMoney,
   withdrawMoney,
+  sendMoney,
 }
