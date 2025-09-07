@@ -201,7 +201,35 @@ const getSingleWallet = async (walletId: string) => {
   return wallet.populate("owner", "fullname phone role");
 };
 
+const blockWallet = async (walletId: string) => {
+  const wallet = await Wallet.findById(walletId);
+  if (!wallet) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Wallet not found");
+  }
+  if (wallet.isBlocked) {
+    throw new AppError(StatusCodes.BAD_GATEWAY, "Wallet is already blocked");
+  }
 
+  wallet.isBlocked = true;
+  await wallet.save();
+
+  return wallet;
+};
+
+const unblockWallet = async (walletId: string) => {
+  const wallet = await Wallet.findById(walletId);
+  if (!wallet) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Wallet not found");
+  }
+  if (!wallet.isBlocked) {
+    throw new AppError(StatusCodes.BAD_GATEWAY, "Wallet is already unblocked");
+  }
+
+  wallet.isBlocked = false;
+  await wallet.save();
+
+  return wallet;
+};
 
 
 export const walletServices = {
@@ -213,4 +241,6 @@ export const walletServices = {
   cashOut,
   getAllWallets,
   getSingleWallet,
+  blockWallet,
+  unblockWallet,
 }

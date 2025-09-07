@@ -56,6 +56,17 @@ router.post(
 //only Admin Access
 router.get("/all", checkAuth(Role.ADMIN), walletControllers.getAllWallets);
 
+router.patch(
+  "/block/:id",
+  checkAuth(Role.ADMIN),
+  walletControllers.blockWallet
+);
+
+router.patch(
+  "/unblock/:id",
+  checkAuth(Role.ADMIN),
+  walletControllers.unblockWallet
+);
 
 router.get("/:id", checkAuth(Role.ADMIN), walletControllers.getSingleWallet);
 

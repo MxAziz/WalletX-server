@@ -162,6 +162,36 @@ const getSingleWallet = catchAsync(
   }
 );
 
+const blockWallet = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const walletId = req.params.id;
+
+    const updatedWallet = await walletServices.blockWallet(walletId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Wallet blocked successfully",
+      data: updatedWallet,
+    });
+  }
+);
+
+const unblockWallet = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const walletId = req.params.id;
+
+    const updatedWallet = await walletServices.unblockWallet(walletId);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Wallet unblocked successfully",
+      data: updatedWallet,
+    });
+  }
+);
+
 export const walletControllers = {
   myWallet,
   addMoney,
@@ -171,4 +201,6 @@ export const walletControllers = {
   sendMoney,
   getAllWallets,
   getSingleWallet,
+  blockWallet,
+  unblockWallet,
 };
