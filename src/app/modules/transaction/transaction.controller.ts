@@ -40,8 +40,44 @@ const getAllTransactions = catchAsync(
   }
 );
 
+const getSingleTransaction = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const transactionId = req.params.id;
+    const transaction = await transactionServices.getSingleTransaction(
+      transactionId
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Transaction retrieved successfully",
+      data: transaction,
+    });
+  }
+);
+
+const updateTransactionStatus = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const transactionId = req.params.id;
+    const payload = req.body;
+
+    const result = await transactionServices.updateTransactionStatus(
+      transactionId,
+      payload
+    );
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Transaction status changed successfully",
+      data: result,
+    });
+  }
+);
 
 export const transactionControllers = {
     myTransactions,
     getAllTransactions,
+    getSingleTransaction,
+    updateTransactionStatus,
 };

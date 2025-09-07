@@ -3,6 +3,7 @@ import { Transaction } from "./transaction.model";
 import { User } from "../user/user.model";
 import AppError from "../../errorHelpers/AppError";
 import { StatusCodes } from "http-status-codes";
+import { ITransaction, TransactionStatus } from "./transaction.interface";
 
 
 
@@ -108,8 +109,39 @@ const getAllTransactions = async (query: Record<string, string>) => {
   };
 };
 
+const getSingleTransaction = async (transactionId: string) => {
+  const transaction = await Transaction.findById(transactionId);
+  if (!transaction) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Transaction not found");
+  }
+
+  if (isValidObjectId(transaction.sender))
+    await transaction.populate("sender", "fullname phone role");
+  if (isValidObjectId(transaction.receiver))
+    await transaction.populate("receiver", "fullname phone role");
+
+  return transaction; //.populate("sender receiver", "fullname phone role");
+};
+
+const updateTransactionStatus = async (
+  transactionId: string,
+  payload: Partial<ITransaction>
+) => {
+  const transaction = await Transaction.findById(transactionId);
+  if (!transaction) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Transaction does not exist");
+  }
+
+  transaction.status = payload.status as TransactionStatus;
+  await transaction.save();
+
+  return transaction;
+};
+
 
 export const transactionServices = {
     myTransactions,
     getAllTransactions,
+    getSingleTransaction,
+    updateTransactionStatus,
 };
