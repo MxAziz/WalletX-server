@@ -1,5 +1,8 @@
 import mongoose, { isValidObjectId } from "mongoose";
 import { Transaction } from "./transaction.model";
+import { User } from "../user/user.model";
+import AppError from "../../errorHelpers/AppError";
+import { StatusCodes } from "http-status-codes";
 
 
 
@@ -53,6 +56,60 @@ const myTransactions = async ( userId: string, query: Record<string, string>) =>
 };
 
 
-export const transactionService = {
-  myTransactions,
+const getAllTransactions = async (query: Record<string, string>) => {
+  const filter: any = { $or: [] };
+
+  if (query.type) filter.type = query.type;
+  if (query.status) filter.status = query.status;
+
+  if (query.from && query.to) {
+    let start = new Date(query.from);
+    start.setHours(0, 0, 0, 0);
+
+    let end = new Date(query.to);
+    end.setHours(23, 59, 59, 999);
+    filter.createdAt = { $gte: start, $lte: end };
+  }
+
+  if (query.phone) {
+    const user = await User.findOne({ phone: query.phone }, "_id");
+    if (!user)
+      throw new AppError(
+        StatusCodes.NOT_FOUND,
+        "Number doesn't associate with any user wallet"
+      );
+
+    filter.$or.push({ sender: user._id });
+    filter.$or.push({ receiver: user._id });
+  }
+
+  const sort = query.sort || "-createdAt";
+  const page = Number(query.page) || 1;
+  const limit = Number(query.limit) || 10;
+  const skip = (page - 1) * Number(limit);
+
+  const result = await Transaction.find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit);
+
+  for (const tx of result) {
+    if (isValidObjectId(tx.sender))
+      await tx.populate("sender", "fullname phone role");
+    if (isValidObjectId(tx.receiver))
+      await tx.populate("receiver", "fullname phone role");
+  }
+  const total = await Transaction.countDocuments(filter);
+  const totalPages = Math.ceil(total / limit);
+
+  return {
+    data: result,
+    meta: { total, limit, page, totalPages },
+  };
+};
+
+
+export const transactionServices = {
+    myTransactions,
+    getAllTransactions,
 };

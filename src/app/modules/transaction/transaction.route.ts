@@ -14,7 +14,12 @@ router.get(
   transactionControllers.myTransactions
 );
 
-
+//only admin
+router.get(
+  "/all",
+  checkAuth(Role.ADMIN),
+  transactionControllers.getAllTransactions
+);
 
 
 
