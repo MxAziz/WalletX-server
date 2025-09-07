@@ -41,8 +41,29 @@ const addMoney = catchAsync(
   }
 );
 
+const withdrawMoney = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user;
+
+    const payload = {
+      sender: decodedToken.phone,
+      receiver: req.body.receiver,
+      amount: req.body.amount,
+    };
+    const wallet = await walletServices.withdrawMoney(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Money withdraw successfully",
+      data: wallet,
+    });
+  }
+);
+
 
 export const walletControllers = {
   myWallet,
   addMoney,
+  withdrawMoney,
 };

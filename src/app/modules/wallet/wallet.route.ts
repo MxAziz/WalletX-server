@@ -3,7 +3,7 @@ import { checkAuth } from "../../middlewares/checkAuth";
 import { Role } from "../user/user.interface";
 import { walletControllers } from "./wallet.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
-import { addMoneyAndCashOutZodSchema } from "./wallet.validation";
+import { addMoneyAndCashOutZodSchema, sendWithdrawAndCashInZodSchema } from "./wallet.validation";
 
 
 
@@ -20,6 +20,13 @@ router.post(
   checkAuth(Role.USER, Role.AGENT),
   validateRequest(addMoneyAndCashOutZodSchema),
   walletControllers.addMoney
+);
+
+router.post(
+  "/withdraw-money",
+  checkAuth(Role.USER),
+  validateRequest(sendWithdrawAndCashInZodSchema),
+  walletControllers.withdrawMoney
 );
 
 

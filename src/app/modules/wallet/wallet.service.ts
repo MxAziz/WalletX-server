@@ -42,10 +42,39 @@ const addMoney = async (payload: Partial<ITransaction>) => {
   return transactionInfo;
 };
 
+const withdrawMoney = async (payload: Partial<ITransaction>) => {
+  const sender = await User.findOne({ phone: payload.sender });
+  const receiver = await User.findOne({ phone: payload.receiver });
+
+  if (!sender)
+    throw new AppError(StatusCodes.NOT_FOUND, "Sender does not exist");
+
+  if (!receiver) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Receiver does not exist");
+  }
+
+  if (receiver.role !== Role.AGENT) {
+    throw new AppError(StatusCodes.FORBIDDEN, `Receiver must be an Agent.`);
+  }
+
+  if (!receiver.agentApproval) {
+    throw new AppError(StatusCodes.FORBIDDEN, `Agent has been suspended`);
+  }
+
+  const transactionInfo = await Wallet.withdrawMoney(
+    sender._id,
+    receiver._id,
+    payload.amount as number
+  );
+
+  return transactionInfo;
+};
+
 
 
 
 export const walletServices = {
   myWallet,
   addMoney,
+  withdrawMoney,
 }
