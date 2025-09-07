@@ -92,6 +92,67 @@ const sendMoney = async (payload: Partial<ITransaction>) => {
   return updatedWallet;
 };
 
+const cashIn = async (payload: Partial<ITransaction>) => {
+  const sender = await User.findOne({ phone: payload.sender });
+  const receiver = await User.findOne({ phone: payload.receiver });
+
+  if (!sender)
+    throw new AppError(StatusCodes.NOT_FOUND, "Sender does not exist");
+
+  if (!receiver) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Receiver does not exist");
+  }
+  if (receiver.role !== Role.USER) {
+    throw new AppError(StatusCodes.FORBIDDEN, `Receiver must be a User.`);
+  }
+
+  if (!sender.agentApproval) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      `You have been suspended! You can not perform this operation!`
+    );
+  }
+
+  const transactionInfo = await Wallet.cashIn(
+    sender._id,
+    receiver._id,
+    payload.amount as number
+  );
+  return transactionInfo;
+};
+
+const cashOut = async (payload: Partial<ITransaction>) => {
+  const sender = await User.findOne({ phone: payload.sender });
+  const receiver = await User.findOne({ phone: payload.receiver });
+
+  if (!sender) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Sender does not exist");
+  }
+  if (!receiver) {
+    throw new AppError(StatusCodes.NOT_FOUND, "Receiver does not exist");
+  }
+  if (sender.role !== Role.USER) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      `Cashout number doesn't associated with a user`
+    );
+  }
+
+  if (!receiver.agentApproval) {
+    throw new AppError(
+      StatusCodes.FORBIDDEN,
+      `You have been suspended! You can not perform this operation!`
+    );
+  }
+
+  const transactionInfo = await Wallet.cashOut(
+    sender._id,
+    receiver._id,
+    payload.amount as number
+  );
+  return transactionInfo;
+};
+
 
 
 
@@ -100,4 +161,6 @@ export const walletServices = {
   addMoney,
   withdrawMoney,
   sendMoney,
+  cashIn,
+  cashOut,
 }

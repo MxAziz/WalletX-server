@@ -89,9 +89,51 @@ const sendMoney = catchAsync(
   }
 );
 
+const cashIn = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user;
+
+    const payload = {
+      sender: decodedToken.phone,
+      receiver: req.body.receiver,
+      amount: req.body.amount,
+    };
+
+    const transactionInfo = await walletServices.cashIn(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Cash-in successfully",
+      data: transactionInfo,
+    });
+  }
+);
+const cashOut = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const decodedToken = req.user;
+
+    const payload = {
+      sender: req.body.sender,
+      receiver: decodedToken.phone,
+      amount: req.body.amount,
+    };
+    const transactionInfo = await walletServices.cashOut(payload);
+
+    sendResponse(res, {
+      success: true,
+      statusCode: StatusCodes.OK,
+      message: "Cash-out successfully",
+      data: transactionInfo,
+    });
+  }
+);
+
 export const walletControllers = {
   myWallet,
   addMoney,
   withdrawMoney,
+  cashIn,
+  cashOut,
   sendMoney,
 };

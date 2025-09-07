@@ -37,4 +37,19 @@ router.post(
 );
 
 
+// Only Agent access
+router.post(
+  "/cash-in",
+  checkAuth(Role.AGENT),
+  validateRequest(sendWithdrawAndCashInZodSchema),
+  walletControllers.cashIn
+);
+
+router.post(
+  "/cash-out",
+  checkAuth(Role.AGENT),
+  validateRequest(addMoneyAndCashOutZodSchema),
+  walletControllers.cashOut
+);
+
 export const WalletRoutes = router;
