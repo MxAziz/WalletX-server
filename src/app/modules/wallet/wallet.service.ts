@@ -153,6 +153,45 @@ const cashOut = async (payload: Partial<ITransaction>) => {
   return transactionInfo;
 };
 
+const getAllWallets = async (query: Record<string, string>) => {
+  const filter: any = {};
+  const sort = query.sort || "-createdAt";
+  const page = Number(query.page) || 1;
+  const limit = Number(query.limit) || 10;
+  const skip = (page - 1) * Number(limit);
+
+  if (query.isBlocked) filter.isBlocked = query.isBlocked;
+
+  if (query.role) {
+    const users = await User.find({ role: query.role }, "_id");
+    filter.owner = users.map((u) => u._id);
+  }
+
+  if (query.phone) {
+    const user = await User.findOne({ phone: query.phone }, "_id");
+    if (!user)
+      throw new AppError(
+        StatusCodes.NOT_FOUND,
+        "Number doesn't associate with any user wallet"
+      );
+    filter.owner = user._id;
+  }
+
+  const wallets = await Wallet.find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .populate("owner", "fullname phone role agentApproval");
+
+  const total = await Wallet.countDocuments(filter);
+  const totalPages = Math.ceil(total / limit);
+
+  return {
+    data: wallets,
+    meta: { total, limit, page, totalPages },
+  };
+};
+
 
 
 
@@ -163,4 +202,5 @@ export const walletServices = {
   sendMoney,
   cashIn,
   cashOut,
+  getAllWallets,
 }
