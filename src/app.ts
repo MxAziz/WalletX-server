@@ -5,13 +5,17 @@ import notFound from "./app/middlewares/notFound";
 import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
 import cookieParser from "cookie-parser";
 import { router } from "./app/routes";
+import { envVars } from "./app/config/env";
 
 dotenv.config();
 
 const app: Application = express();
 
 // middlewares
-app.use(cors());
+app.use(cors({
+  origin: envVars.FRONTEND_URL,
+  credentials: true,
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -21,7 +25,7 @@ app.use("/api/v1", router);
 
 // routes
 app.get("/", (req: Request, res: Response) => {
-  res.send("Api is Running");
+  res.send("WalletX API is Running");
 });
 
 app.use(globalErrorHandler) // ✅ Always after routes
