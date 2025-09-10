@@ -33,7 +33,7 @@ const getAllTransactions = catchAsync(
     sendResponse(res, {
       statusCode: StatusCodes.OK,
       success: true,
-      message: "User Transactions retrieved successfully",
+      message: "User all Transactions retrieved successfully",
       meta: result.meta,
       data: result.data,
     });

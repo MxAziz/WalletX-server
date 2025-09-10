@@ -4,6 +4,8 @@ import { IUser, Role } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus, { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
+import { Wallet } from "../wallet/wallet.model";
+import { Transaction } from "../transaction/transaction.model";
 
 
 const register = async (payload: IUser) => {
@@ -20,6 +22,19 @@ const register = async (payload: IUser) => {
 
   const user = await User.create({ phone, password: hashedPassword, ...rest });
   const { password: pass, ...userInfo } = user.toObject();
+
+  await Wallet.create({
+    user: user._id,
+    balance: 50,
+    isBlocked: false,
+  });
+
+  await Transaction.create({
+  type: "ADD_MONEY",
+  receiver: user._id,
+  amount: 50,
+  status: "COMPLETED",
+});
 
   return userInfo;
 };
