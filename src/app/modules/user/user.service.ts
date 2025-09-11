@@ -23,18 +23,21 @@ const register = async (payload: IUser) => {
   const user = await User.create({ phone, password: hashedPassword, ...rest });
   const { password: pass, ...userInfo } = user.toObject();
 
-  await Wallet.create({
-    user: user._id,
-    balance: 50,
-    isBlocked: false,
-  });
 
-  await Transaction.create({
-  type: "ADD_MONEY",
-  receiver: user._id,
-  amount: 50,
-  status: "COMPLETED",
-});
+  if (user.role === Role.AGENT || user.role === Role.USER) {
+      const wallet = await Wallet.create({
+        owner: user._id,
+        balance: 50,
+        isBlocked: false,
+      });
+
+      // const transaction = await Transaction.create({
+      //   type: "ADD_MONEY",
+      //   receiver: user._id,
+      //   amount: 50,
+      //   status: "COMPLETED",
+      // });
+  }
 
   return userInfo;
 };
