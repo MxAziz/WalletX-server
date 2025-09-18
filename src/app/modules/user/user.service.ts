@@ -5,7 +5,6 @@ import { User } from "./user.model";
 import httpStatus, { StatusCodes } from 'http-status-codes';
 import bcrypt from 'bcryptjs';
 import { Wallet } from "../wallet/wallet.model";
-import { Transaction } from "../transaction/transaction.model";
 
 
 const register = async (payload: IUser) => {
@@ -30,13 +29,6 @@ const register = async (payload: IUser) => {
         balance: 50,
         isBlocked: false,
       });
-
-      // const transaction = await Transaction.create({
-      //   type: "ADD_MONEY",
-      //   receiver: user._id,
-      //   amount: 50,
-      //   status: "COMPLETED",
-      // });
   }
 
   return userInfo;

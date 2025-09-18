@@ -23,7 +23,6 @@ const register = catchAsync(
 const getMe = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const decodedToken = req.user;
-    console.log(decodedToken);
     const user = await userServices.getMe(decodedToken.userId);
 
     sendResponse(res, {
