@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "1dd2465f-ed1a-4166-921f-3ddc9319a50d",
+		"name": "WalletX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41622047"
+	},
+	"item": [
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "register - public",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullname\": \"mr. ali\",\r\n  \"phone\": \"01712123434\",\r\n  \"password\": \"Abcabc3#\",\r\n  \"role\": \"USER\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/register",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get me",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGNjMmI0MzA4MTY4MDczYzNjODE1MjkiLCJwaG9uZSI6IjAxMzc3Nzc3Nzc3Iiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgyMTA5NTYsImV4cCI6MTc1ODI5NzM1Nn0.uU_TRWLQNWExYau0J30-SDfZBfolsaN6MFsVTZr2COI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/me",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update user profile",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGNjMmI0MzA4MTY4MDczYzNjODE1MjkiLCJwaG9uZSI6IjAxMzc3Nzc3Nzc3Iiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgyMTA5NTYsImV4cCI6MTc1ODI5NzM1Nn0.uU_TRWLQNWExYau0J30-SDfZBfolsaN6MFsVTZr2COI",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\":\"Mofiz Ahmed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/update",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approve-agent  - admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTExMDg3LCJleHAiOjE3NTgxOTc0ODd9.hFK6lNEij1ujXyoeu76mkSluIwaQINAn7qgncBZFk5c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/approve-agent/68caa64a31b3dfaccaf2e5d9",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"approve-agent",
+								"68caa64a31b3dfaccaf2e5d9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "suspend-agent  - admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTExMDg3LCJleHAiOjE3NTgxOTc0ODd9.hFK6lNEij1ujXyoeu76mkSluIwaQINAn7qgncBZFk5c",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/suspend-agent/68caa64a31b3dfaccaf2e5d9",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"suspend-agent",
+								"68caa64a31b3dfaccaf2e5d9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/change-password",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGJkYjkzMTdhNDMzN2Y2MTg0Y2EwM2MiLCJwaG9uZSI6IjAxNzExMTEyMjIyIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTc0Njk1NTksImV4cCI6MTc1NzU1NTk1OX0.y3Zc2B-wI76W8AUMAy6VByqvBmO6kgUigZ4zbcLGVbo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userId\":\"68cc2b4308168073c3c81529\",\r\n    \"currentPassword\":\"Abcabc3#\",\r\n    \"newPassword\":\"Thethe3#\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/change-password",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all users - admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU3NTI1NzA2LCJleHAiOjE3NTc2MTIxMDZ9.tsjv7w3dGHIep78Ywpq0SeT7Tpt4H4x8IUwlBEQdIwk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/all-users",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"all-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by ID - admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU3NTI1NzA2LCJleHAiOjE3NTc2MTIxMDZ9.tsjv7w3dGHIep78Ywpq0SeT7Tpt4H4x8IUwlBEQdIwk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/users/68bdb9317a4337f6184ca03c",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"68bdb9317a4337f6184ca03c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "user login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"01555555555\",\r\n  \"password\": \"Abcabc3#\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/auth/login",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"phone\": \"01700000000\",\r\n  \"password\": \"Password@123\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/auth/logout",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refress-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/auth/refresh-token",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "wallet",
+			"item": [
+				{
+					"name": "/me  -  user/agent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGNjMmI0MzA4MTY4MDczYzNjODE1MjkiLCJwaG9uZSI6IjAxMzc3Nzc3Nzc3Iiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgyMTA5NTYsImV4cCI6MTc1ODI5NzM1Nn0.uU_TRWLQNWExYau0J30-SDfZBfolsaN6MFsVTZr2COI",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/me",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/add-money-user/agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjhlMTZkZTUxMzEzZmQ3OGRkYmMiLCJwaG9uZSI6IjAxMTExMTExMTExIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNzU4MTExNTczLCJleHAiOjE3NTgxOTc5NzN9.lx3xGPIFzMh7KH9rgW5bMoxEfBdHv4KrcqY1xc5ceAs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"sender\":\"01111111111\",\r\n    \"receiver\": \"01333333333\",\r\n    \"amount\": 5\r\n     }\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/add-money",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"add-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/withdraw-money-user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjg2NDZkZTUxMzEzZmQ3OGRkYjIiLCJwaG9uZSI6IjAxMzMzMzMzMzMzIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgxMTM3MzgsImV4cCI6MTc1ODIwMDEzOH0.W67B5AAiiNCfIf-gymQEa8e9jeFLv0SWfJoxXTee3VE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"01377777777\",\r\n    \"receiver\": \"01111111111\",\r\n    \"amount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/withdraw-money",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"withdraw-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "send-money  - user",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjg2NDZkZTUxMzEzZmQ3OGRkYjIiLCJwaG9uZSI6IjAxMzMzMzMzMzMzIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgxMTM3MzgsImV4cCI6MTc1ODIwMDEzOH0.W67B5AAiiNCfIf-gymQEa8e9jeFLv0SWfJoxXTee3VE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"01333333333\",\r\n    \"receiver\": \"01222222222\",\r\n    \"amount\":2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/send-money",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"send-money"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cash-in-agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjhlMTZkZTUxMzEzZmQ3OGRkYmMiLCJwaG9uZSI6IjAxMTExMTExMTExIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNzU4MjExMzYyLCJleHAiOjE3NTgyOTc3NjJ9.7pdf4JoMOEsXkI1zziHhJx9Asw3rFtxAAZEYu3owmLs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"receiver\": \"01377777777\",\r\n  \"amount\": 20\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/cash-in",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"cash-in"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cash out - agent",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjhlMTZkZTUxMzEzZmQ3OGRkYmMiLCJwaG9uZSI6IjAxMTExMTExMTExIiwicm9sZSI6IkFHRU5UIiwiaWF0IjoxNzU4MjExMzYyLCJleHAiOjE3NTgyOTc3NjJ9.7pdf4JoMOEsXkI1zziHhJx9Asw3rFtxAAZEYu3owmLs",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"sender\": \"01377777777\",\r\n    \"amount\": 5\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/cash-out",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"cash-out"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all wallets - admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/all",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get wallet by ID - admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/68c268646de51313fd78ddb4",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"68c268646de51313fd78ddb4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "block a wallet - admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/block/68caa64a31b3dfaccaf2e5db",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"block",
+								"68caa64a31b3dfaccaf2e5db"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "unblock a wallet - admin",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/wallets/unblock/68caa64a31b3dfaccaf2e5db",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"wallets",
+								"unblock",
+								"68caa64a31b3dfaccaf2e5db"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "me - user/agent",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMyNjg2NDZkZTUxMzEzZmQ3OGRkYjIiLCJwaG9uZSI6IjAxMzMzMzMzMzMzIiwicm9sZSI6IlVTRVIiLCJpYXQiOjE3NTgxMTM3MzgsImV4cCI6MTc1ODIwMDEzOH0.W67B5AAiiNCfIf-gymQEa8e9jeFLv0SWfJoxXTee3VE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/transactions/me",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all-transactions-admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/transactions/all",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-tran-by-id-admin",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2OGMwZTM2MjcxNzhlMWY5Y2M4YWVkNzkiLCJwaG9uZSI6IjAxNTU1NTU1NTU1Iiwicm9sZSI6IkFETUlOIiwiaWF0IjoxNzU4MTEyODIwLCJleHAiOjE3NTgxOTkyMjB9.WjA4a7dkUADVSoq9a1qVBEqwoCytXLhK5gmiCRqu3sg",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/transactions/68caaadb31b3dfaccaf2e60e",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"68caaadb31b3dfaccaf2e60e"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update-status-admin",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"status\": \"REVERSED\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://walletx-server-sable.vercel.app/api/v1/transactions/68caaadb31b3dfaccaf2e60e",
+							"protocol": "https",
+							"host": [
+								"walletx-server-sable",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"68caaadb31b3dfaccaf2e60e"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
